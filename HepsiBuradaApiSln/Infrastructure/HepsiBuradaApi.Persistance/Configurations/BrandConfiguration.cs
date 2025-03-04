@@ -27,7 +27,7 @@ namespace HepsiBuradaApi.Persistance.Configurations
             };
             Brand brand2 = new()
             {
-                Id = 3,
+                Id = 2,
                 Name = faker.Commerce.Department(),
                 CreatedDate = DateTime.Now,
                 IsDeleted = false
