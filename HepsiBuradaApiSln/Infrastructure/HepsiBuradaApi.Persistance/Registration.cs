@@ -1,6 +1,8 @@
 ﻿using HepsiBuradaApi.Application.Interfaces.Repositories;
+using HepsiBuradaApi.Application.Interfaces.UnitOfWorks;
 using HepsiBuradaApi.Persistance.Context;
 using HepsiBuradaApi.Persistance.Repositories;
+using HepsiBuradaApi.Persistance.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,5 +21,6 @@ public static class Registration
         services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
         services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }
