@@ -1,3 +1,5 @@
+using HepsiBuradaApi.Application;
+using HepsiBuradaApi.Mapper;
 using HepsiBuradaApi.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,9 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: false)
     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-builder.Services.AddPersistance(builder.Configuration  );
+builder.Services.AddPersistance(builder.Configuration);
+builder.Services.AddApplicaiton();
+builder.Services.AddCustomMapper();
 
 var app = builder.Build();
 
