@@ -25,6 +25,5 @@ namespace HepsiBuradaApi.Persistance.UnitOfWorks
         public async Task<int> SaveAsync() => await _dbContext.SaveChangesAsync();
         public int Save() => _dbContext.SaveChanges();
 
-
     }
 }

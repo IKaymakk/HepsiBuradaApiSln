@@ -31,5 +31,15 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommandR
         var productCategories = await _unitOfWork.GetReadRepository<ProductCategory>()
             .GetAllAsync(x => x.ProductId == product.Id);
 
+        await _unitOfWork.GetWriteRepository<ProductCategory>()
+            .HardDeleteRangeAsync(productCategories);
+
+        foreach (var categoryId in request.CategoryIds)
+            await _unitOfWork.GetWriteRepository<ProductCategory>()
+                .AddAsync(new ProductCategory { CategoryId = categoryId, ProductId = product.Id });
+
+        await _unitOfWork.GetWriteRepository<Domain.Entities.Product>()
+            .UpdateAsync(mappedProduct);
+        await _unitOfWork.SaveAsync();
     }
 }

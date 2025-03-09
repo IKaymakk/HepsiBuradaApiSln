@@ -20,16 +20,15 @@ public class WriteRepository<T> : IWriteRepository<T> where T : class, IEntityBa
     }
     private DbSet<T> Table { get => _dbContext.Set<T>(); }
 
+
     public async Task AddAsync(T entity)
     {
         await Table.AddAsync(entity);
     }
-
     public async Task AddRangeAsync(IList<T> entities)
     {
         await Table.AddRangeAsync(entities);
     }
-
     public async Task<T> UpdateAsync(T entity)
     {
         await Task.Run(() => Table.Update(entity));
@@ -39,5 +38,8 @@ public class WriteRepository<T> : IWriteRepository<T> where T : class, IEntityBa
     {
         await Task.Run(() => Table.Remove(entity));
     }
-
+    public async Task HardDeleteRangeAsync(IList<T> entity)
+    {
+        await Task.Run(() => Table.RemoveRange(entity));
+    }
 }

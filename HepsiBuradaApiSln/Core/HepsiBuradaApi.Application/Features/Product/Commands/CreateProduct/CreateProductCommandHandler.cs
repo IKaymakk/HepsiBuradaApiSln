@@ -7,33 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HepsiBuradaApi.Application.Features.Product.Commands.CreateProduct
+namespace HepsiBuradaApi.Application.Features.Product.Commands.CreateProduct;
+
+public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest>
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest>
+    private readonly IUnitOfWork _unitOfWork;
+
+    public CreateProductCommandHandler(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork _unitOfWork;
+        _unitOfWork = unitOfWork;
+    }
 
-        public CreateProductCommandHandler(IUnitOfWork unitOfWork)
+    public async Task Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
+    {
+        Domain.Entities.Product product = new(request.Title, request.Description, request.Price, request.Discount, request.BrandId);
+        await _unitOfWork.GetWriteRepository<Domain.Entities.Product>().AddAsync(product);
+
+        if (await _unitOfWork.SaveAsync() > 0)
         {
-            _unitOfWork = unitOfWork;
+            foreach (var categoryId in request.CategoryIds)
+                await _unitOfWork.GetWriteRepository<ProductCategory>().AddAsync(new ProductCategory()
+                {
+                    CategoryId = categoryId,
+                    ProductId = product.Id
+                });
+            await _unitOfWork.SaveAsync();
         }
 
-        public async Task Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
-        {
-            Domain.Entities.Product product = new(request.Title, request.Description, request.Price, request.Discount, request.BrandId);
-            await _unitOfWork.GetWriteRepository<Domain.Entities.Product>().AddAsync(product);
-
-            if (await _unitOfWork.SaveAsync() > 0)
-            {
-                foreach (var categoryId in request.CategoryIds)
-                    await _unitOfWork.GetWriteRepository<ProductCategory>().AddAsync(new ProductCategory()
-                    {
-                        CategoryId = categoryId,
-                        ProductId = product.Id
-                    });
-                await _unitOfWork.SaveAsync();
-            }
-
-        }
     }
 }
