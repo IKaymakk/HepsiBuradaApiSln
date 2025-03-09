@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HepsiBuradaApi.Application.Features.Product.GetAllProducts
+namespace HepsiBuradaApi.Application.Features.Product.Queries.GetAllProducts
 {
     public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQueryRequest, IList<GetAllProductQueryResponse>>
     {
@@ -30,7 +30,7 @@ namespace HepsiBuradaApi.Application.Features.Product.GetAllProducts
 
             var mappedProducts = mapper.Map<GetAllProductQueryResponse, Domain.Entities.Product>(products);
             foreach (var x in mappedProducts)
-                x.Price -= (x.Price * x.Discount) / 100;
+                x.Price -= x.Price * x.Discount / 100;
 
             return mappedProducts;
         }

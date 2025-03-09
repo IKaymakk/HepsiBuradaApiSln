@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HepsiBuradaApi.Application.Features.Product.GetAllProducts
+namespace HepsiBuradaApi.Application.Features.Product.Queries.GetAllProducts
 {
     public class GetAllProductQueryRequest : IRequest<IList<GetAllProductQueryResponse>>
     {
