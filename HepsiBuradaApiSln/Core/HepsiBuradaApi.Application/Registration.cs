@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using HepsiBuradaApi.Application.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ public static class Registration
     {
         var assembly = Assembly.GetExecutingAssembly();
         service.AddMediatR(opt => opt.RegisterServicesFromAssembly(assembly));
+        service.AddTransient<ExceptionMiddleWare>();
     }
 }

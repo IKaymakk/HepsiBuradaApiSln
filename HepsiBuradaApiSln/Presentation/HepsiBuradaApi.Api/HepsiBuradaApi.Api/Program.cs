@@ -1,4 +1,5 @@
 using HepsiBuradaApi.Application;
+using HepsiBuradaApi.Application.Exceptions;
 using HepsiBuradaApi.Mapper;
 using HepsiBuradaApi.Persistance;
 
@@ -23,13 +24,14 @@ builder.Services.AddApplicaiton();
 builder.Services.AddCustomMapper();
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureExceptionHandlingMidddleWare();
 
 app.UseAuthorization();
 
