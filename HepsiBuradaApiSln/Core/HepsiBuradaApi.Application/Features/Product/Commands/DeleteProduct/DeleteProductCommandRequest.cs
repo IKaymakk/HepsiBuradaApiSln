@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HepsiBuradaApi.Application.Features.Product.Commands.DeleteProduct
 {
-    public class DeleteProductCommandRequest : IRequest
+    public class DeleteProductCommandRequest : IRequest<Unit>
     {
         public int id { get; set; }
     }

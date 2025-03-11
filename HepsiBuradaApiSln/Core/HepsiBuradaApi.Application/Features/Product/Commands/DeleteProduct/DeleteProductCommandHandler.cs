@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HepsiBuradaApi.Application.Features.Product.Commands.DeleteProduct
 {
-    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommandRequest>
+    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommandRequest,Unit>
     {
         private readonly IUnitOfWork _unitofwork;
 
@@ -17,7 +17,7 @@ namespace HepsiBuradaApi.Application.Features.Product.Commands.DeleteProduct
             _unitofwork = unitofwork;
         }
 
-        public async Task Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
         {
             var product = await _unitofwork.GetReadRepository<Domain.Entities.Product>()
                 .GetAsync(x => x.Id == request.id && !x.IsDeleted);
@@ -28,6 +28,7 @@ namespace HepsiBuradaApi.Application.Features.Product.Commands.DeleteProduct
 
             await _unitofwork.SaveAsync();
 
+            return Unit.Value;
         }
     }
 }
