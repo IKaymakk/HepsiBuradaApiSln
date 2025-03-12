@@ -2,6 +2,7 @@ using HepsiBuradaApi.Application;
 using HepsiBuradaApi.Application.Exceptions;
 using HepsiBuradaApi.Mapper;
 using HepsiBuradaApi.Persistance;
+using HepsiBuradaApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Configuration
 builder.Services.AddPersistance(builder.Configuration);
 builder.Services.AddApplicaiton();
 builder.Services.AddCustomMapper();
+builder.Services.AddInfastructure(builder.Configuration);
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
