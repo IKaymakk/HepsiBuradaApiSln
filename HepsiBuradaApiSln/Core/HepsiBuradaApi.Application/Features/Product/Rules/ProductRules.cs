@@ -10,10 +10,9 @@ namespace HepsiBuradaApi.Application.Features.Product.Rules;
 
 public class ProductRules : BaseRules
 {
-    public Task ProductTitleMustNotBeSame(string requestTitle, string productTitle)
+    public Task ProductTitleMustNotBeSame(IList<Domain.Entities.Product> products, string requestTitle)
     {
-        if (requestTitle == productTitle) 
-            throw new ProductTitleMustNotBeSameException();
+        if (products.Any(x => x.Title == requestTitle)) throw new ProductTitleMustNotBeSameException();
 
         return Task.CompletedTask;
     }

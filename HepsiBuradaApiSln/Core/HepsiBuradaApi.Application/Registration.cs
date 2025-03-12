@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
+using HepsiBuradaApi.Application.Bases;
 using HepsiBuradaApi.Application.Behaviors;
 using HepsiBuradaApi.Application.Exceptions;
+using HepsiBuradaApi.Application.Features.Product.Rules;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -28,5 +30,16 @@ public static class Registration
         ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("tr");
 
         service.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehaviors<,>));
+
+        service.AddRulesFromAssemblyContaining(assembly, typeof(BaseRules));
+
     }
+    private static IServiceCollection AddRulesFromAssemblyContaining(this IServiceCollection service, Assembly assembly, Type type)
+    {
+        var types = assembly.GetTypes().Where(x => x.IsSubclassOf(type) && type != x).ToList();
+        foreach (var t in types)
+            service.AddTransient(t);
+        return service;
+    }
+
 }
