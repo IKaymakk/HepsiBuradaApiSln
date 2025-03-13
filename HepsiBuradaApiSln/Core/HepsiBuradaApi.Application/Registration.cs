@@ -21,16 +21,11 @@ public static class Registration
     public static void AddApplicaiton(this IServiceCollection service)
     {
         var assembly = Assembly.GetExecutingAssembly();
-
-        service.AddMediatR(opt => opt.RegisterServicesFromAssembly(assembly));
-
-        service.AddTransient<ExceptionMiddleWare>();
-
-        service.AddValidatorsFromAssembly(assembly);
         ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("tr");
-
+        service.AddMediatR(opt => opt.RegisterServicesFromAssembly(assembly));
+        service.AddTransient<ExceptionMiddleWare>();
+        service.AddValidatorsFromAssembly(assembly);
         service.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehaviors<,>));
-
         service.AddRulesFromAssemblyContaining(assembly, typeof(BaseRules));
 
     }
