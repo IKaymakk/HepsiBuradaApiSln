@@ -39,7 +39,8 @@ builder.Services.AddSwaggerGen(x =>
         }
     });
 });
-
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 var env = builder.Environment;
 
 builder.Configuration
@@ -61,7 +62,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.ConfigureExceptionHandlingMidddleWare();
-
 app.UseAuthorization();
 
 app.MapControllers();
