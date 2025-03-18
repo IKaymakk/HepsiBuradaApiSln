@@ -28,9 +28,13 @@ public class RegisterCommandHandler : BaseHandler, IRequestHandler<RegisterComma
     }
     public async Task<Unit> Handle(RegisterCommandRequest request, CancellationToken cancellationToken)
     {
-        await authRules.UserShouldNotBeExist(await userManager.FindByEmailAsync(request.Email));
-        User user = _mapper.Map<User, RegisterCommandRequest>(request);
+        //await authRules.UserShouldNotBeExist(await userManager.FindByEmailAsync(request.Email));
+        //User user = _mapper.Map<User, RegisterCommandRequest>(request);
+        User user = new();
+        user.FullName = request.FullName;
         user.UserName = request.Email;
+        user.Email = request.Email;
+        user.PasswordHash = request.Password;
         user.SecurityStamp = Guid.NewGuid().ToString();
 
         IdentityResult result = await userManager.CreateAsync(user, request.Password);

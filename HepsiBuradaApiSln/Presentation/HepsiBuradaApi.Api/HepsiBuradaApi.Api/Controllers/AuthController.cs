@@ -1,4 +1,5 @@
-﻿using HepsiBuradaApi.Application.Features.Auth.Command.Register;
+﻿using HepsiBuradaApi.Application.Features.Auth.Command.Login;
+using HepsiBuradaApi.Application.Features.Auth.Command.Register;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,5 +21,11 @@ public class AuthController : ControllerBase
     {
         await _mediator.Send(request);
         return StatusCode(StatusCodes.Status201Created);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginCommandRequest request)
+    {
+        var response = await _mediator.Send(request);
+        return StatusCode(StatusCodes.Status200OK, response);
     }
 }

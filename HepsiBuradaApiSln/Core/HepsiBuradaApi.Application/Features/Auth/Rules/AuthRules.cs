@@ -7,17 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HepsiBuradaApi.Application.Features.Auth.Rules
+namespace HepsiBuradaApi.Application.Features.Auth.Rules;
+
+public class AuthRules : BaseRules
 {
-    public class AuthRules:BaseRules
+    public Task UserShouldNotBeExist(User? user)
     {
-        public Task UserShouldNotBeExist(User? user)
-        {
-            if (user is not null)
-            {
-                throw new UserAlreadyExistException();
-            }
-            return Task.CompletedTask;
-        }
+        if (user is not null) throw new UserAlreadyExistException();
+        return Task.CompletedTask;
+    }
+
+    public Task EmailOrPasswordShouldNotBeInvalid(User? user, bool checkPassword)
+    {
+        if (user == null || !checkPassword) throw new EmailOrPasswordShouldNotBeInvalidException();
+
+        return Task.CompletedTask;
     }
 }
