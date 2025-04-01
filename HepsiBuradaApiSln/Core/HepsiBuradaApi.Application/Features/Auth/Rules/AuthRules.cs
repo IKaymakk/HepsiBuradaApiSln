@@ -16,11 +16,14 @@ public class AuthRules : BaseRules
         if (user is not null) throw new UserAlreadyExistException();
         return Task.CompletedTask;
     }
-
     public Task EmailOrPasswordShouldNotBeInvalid(User? user, bool checkPassword)
     {
         if (user == null || !checkPassword) throw new EmailOrPasswordShouldNotBeInvalidException();
-
+        return Task.CompletedTask;
+    }
+    public Task RefreshTokenSohuldNotBeExpired(DateTime? expiryDate)
+    {
+        if (expiryDate <= DateTime.Now) throw new RefreshTokenSohuldNotBeExpiredException();
         return Task.CompletedTask;
     }
 }
