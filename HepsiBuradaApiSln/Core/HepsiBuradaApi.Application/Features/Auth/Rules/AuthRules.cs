@@ -26,4 +26,10 @@ public class AuthRules : BaseRules
         if (expiryDate <= DateTime.Now) throw new RefreshTokenSohuldNotBeExpiredException();
         return Task.CompletedTask;
     }
+
+    public Task EmailAddressShouldBeValid(User? user)
+    {
+        if (user == null) throw new EmailAddressShouldBeValidException();
+        return Task.CompletedTask;
+    }
 }
