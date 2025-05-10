@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HepsiBuradaApi.Persistance"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HepsiBuradaApi.Api", "HepsiBuradaApiSln\Presentation\HepsiBuradaApi.Api\HepsiBuradaApi.Api\HepsiBuradaApi.Api.csproj", "{E2A60E20-B879-497A-B212-E3A192E4D895}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HepsiBuradaApi.Mapper", "HepsiBuradaApi.Mapper\HepsiBuradaApi.Mapper.csproj", "{3CE824C2-39FD-4069-B299-226E2BF17C3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E2A60E20-B879-497A-B212-E3A192E4D895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2A60E20-B879-497A-B212-E3A192E4D895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2A60E20-B879-497A-B212-E3A192E4D895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CE824C2-39FD-4069-B299-226E2BF17C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CE824C2-39FD-4069-B299-226E2BF17C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CE824C2-39FD-4069-B299-226E2BF17C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CE824C2-39FD-4069-B299-226E2BF17C3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{04B60269-2E93-41F0-B1F5-37B58B0254A1} = {A2B17254-D9FD-485A-B398-92CF014B6082}
 		{C30E3F6C-2B95-46CF-816F-FD04DD25BFA9} = {A2B17254-D9FD-485A-B398-92CF014B6082}
 		{E2A60E20-B879-497A-B212-E3A192E4D895} = {1B5EF3FD-09E8-4AE5-9AEB-940A9426FD48}
+		{3CE824C2-39FD-4069-B299-226E2BF17C3F} = {0622DE7E-A58A-4AA0-999A-863575ECEC56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86D7E5AD-387D-41C2-8EFF-9353ADE9A265}
